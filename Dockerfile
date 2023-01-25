@@ -17,7 +17,7 @@ RUN apk --no-cache add \
 
 RUN pip3 install "gdtoolkit==3.*"
 
-COPY ./nvim-config /root/.config/nvim
+COPY ./nvim_config /root/.config/nvim
 COPY ./godot_sample_project /godot_sample_project
 
 WORKDIR /godot_sample_project
