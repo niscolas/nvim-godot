@@ -1,0 +1,13 @@
+## neovim
+plugin/packer_compiled.lua
+
+## godot
+**/.import/
+**/export.cfg
+**/export_presets.cfg
+# imported translations (automatically generated from csv files)
+**/*.translation
+# mono-specific ignores
+**/.mono/
+**/data_*/
+**/mono_crash.*.json
