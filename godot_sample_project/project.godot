@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="neogodot sample"
+config/name="nvim-godot sample"
 config/icon="res://icon.png"
 
 [gui]
