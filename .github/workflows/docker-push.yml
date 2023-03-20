@@ -1,9 +1,12 @@
-name: "docker build and push image"
+name: "🐳 Docker (Build and Push)"
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "nvim_config/**"
+      - "godot_sample_project/**"
 
 jobs:
   docker:
