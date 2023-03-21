@@ -1,13 +1,14 @@
 ## neovim
-**/plugin/packer_compiled.lua
+nvim_config/**/plugin/packer_compiled.lua
 
 ## godot
-**/.import/
-**/export.cfg
-**/export_presets.cfg
+godot_sample_project/**/.import/
+godot_sample_project/**/.godot/
+godot_sample_project/**/export.cfg
+godot_sample_project/**/export_presets.cfg
 # imported translations (automatically generated from csv files)
-**/*.translation
+godot_sample_project/**/*.translation
 # mono-specific ignores
-**/.mono/
-**/data_*/
-**/mono_crash.*.json
+godot_sample_project/**/.mono/
+godot_sample_project/**/data_*/
+godot_sample_project/**/mono_crash.*.json
