@@ -1,14 +1,23 @@
 #!/usr/bin/env bash
 
-# replace with your terminal
-term_exec=kitty
+# CHANGE IF NEEDED: 
+# - replace with your Terminal Emulator executable
+term_exec="kitty"
+# - replace with your Neovim executable
+nvim_exec="nvim"
+# - replace with other path for the Neovim server pipe
+server_path="$HOME/.cache/nvim/godot-server.pipe"
 
-server_path=$HOME/.cache/nvim/godot-server.pipe
+start_server() {
+    "$term_exec" "$nvim_exec" --listen "$server_path" "$1"
+}
 
-if ! [ -e $server_path ]; then
-    # start the server if its pipe doesn't exist
-    $term_exec nvim --listen $server_path $1
+open_file_in_server() {
+    "$term_exec" "$nvim_exec" --server "$server_path" --remote-send "<C-\><C-n>:n $1<CR>:call cursor($2)<CR>"
+}
+
+if ! [ -e "$server_path" ]; then
+    start_server "$1"
+else 
+    open_file_in_server "$1" "$2"
 fi
-
-# open file in server
-$term_exec nvim --server $server_path --remote-send "<C-\><C-n>:n $1<CR>:call cursor($2)<CR>"
