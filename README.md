@@ -19,8 +19,8 @@ To be able to leverage the power of the Neovim-Godot integration, you can follow
 1. Docker, which is possibly the quickest way and it's described below
 
 2. Downloading this custom Neovim Config to you local setup
-    1. Can be done by cloning the repo and moving the [nvim_config/](nvim_config/) directory to your `$HOME/.config/nvim`
-    2. Or with this script (your current Neovim config will be moved to `$HOME/.config/nvim.old`, make sure that it's already in you Version Control system or that you know what you're doing)
+    - Can be done by cloning the repo and moving the [nvim_config/](nvim_config/) directory to your `$HOME/.config/nvim`
+    - Or with this script (your current Neovim config will be moved to `$HOME/.config/nvim.old`, make sure that it's already in you Version Control system or that you know what you're doing)
 ```
 mv $HOME/.config/nvim $HOME/.config/nvim.old && \
 git clone https://github.com/niscolas/nvim-godot && \
@@ -44,9 +44,12 @@ Out of the box you should have:
 This is the default look of the custom Neovim Config included in this repo: ([🌲 *everforest theme*](https://github.com/sainnhe/everforest))
 > 💡 Screenshots taken from the Neovim instance running on the Docker container!
 
-<img src="https://i.imgur.com/qVhgZZy.png" width="45%">
-<img src="https://i.imgur.com/YtchKbV.png" width="45%">
-<img src="https://i.imgur.com/en5rDnZ.png" width="45%">
+<img src="https://i.imgur.com/YtchKbV.png">
+<details>
+<summary>Extra screenshots</summary>
+<img src="https://i.imgur.com/qVhgZZy.png">
+<img src="https://i.imgur.com/en5rDnZ.png">
+</details>
 
 #### 📦 Settings and Plugins
 Most of the Neovim config was copied from [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), with the theme change and the Godot specific LSP, TreeSitter and DAP settings
