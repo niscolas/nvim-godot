@@ -20,4 +20,7 @@ RUN pip3 install "gdtoolkit==3.*"
 COPY ./nvim_config /root/.config/nvim
 COPY ./godot_sample_project /godot_sample_project
 
+EXPOSE 6005
+EXPOSE 6006
+
 WORKDIR /godot_sample_project
