@@ -1,5 +1,5 @@
--- Set lualine as statusline
--- See `:help lualine.txt`
+-- [[ Configure Lualine ]]
+-- See `:help lualine`
 require("lualine").setup {
     options = {
         icons_enabled = true,
@@ -9,18 +9,19 @@ require("lualine").setup {
     },
 }
 
--- enable Comment.nvim
+-- [[ Configure Comment.nvim ]]
+-- See `:help comment-nvim`
 require("Comment").setup()
 
--- enable `lukas-reineke/indent-blankline.nvim`
--- see `:help indent_blankline.txt`
+-- [[ Configure indent-blankline.nvim ]]
+-- See `:help indent_blankline`
 require("indent_blankline").setup {
     char = "┊",
     show_trailing_blankline_indent = false,
 }
 
--- gitsigns
--- see `:help gitsigns.txt`
+-- [[ Configure Gitsigns ]]
+-- See `:help gitsigns`
 require("gitsigns").setup {
     signs = {
         add = { text = "+" },
@@ -101,28 +102,32 @@ vim.keymap.set(
     { desc = "[S]earch [D]iagnostics" }
 )
 
+-- [[ Configure Treesitter ]]
+-- See `:help which-key.nvim`
 require("which-key").setup()
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require("nvim-treesitter.configs").setup {
     -- Add languages to be installed here that you want installed for treesitter
+    -- Uncomment other languagues if needed
     ensure_installed = {
+        -- "c",
+        -- "cpp",
+        -- "go",
+        -- "python",
+        -- "rust",
+        -- "typescript",
+
         "c_sharp",
-        "c",
-        "cpp",
         "gdscript",
-        "go",
         "lua",
-        "python",
-        "rust",
-        "typescript",
         "help",
         "vim",
     },
 
     highlight = { enable = true },
-    indent = { enable = true, disable = { "python" } },
+    indent = { enable = true },
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -178,7 +183,7 @@ require("nvim-treesitter.configs").setup {
     },
 }
 
--- LSP settings.
+-- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
     -- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -238,7 +243,29 @@ local on_attach = function(_, bufnr)
     end, "[W]orkspace [L]ist Folders")
 end
 
--- define settings for `null-ls`
+-- Enable the following language servers
+--  feel free to add/remove any lsps that you want here. they will automatically be installed.
+--  add any additional override configuration in the following tables. they will be passed to
+--  the `settings` field of the server config. you must look up that documentation yourself.
+local servers = {
+    -- clangd = {},
+    -- gopls = {},
+    -- pyright = {},
+    -- rust_analyzer = {},
+    -- tsserver = {},
+
+    gdscript = {},
+    lua_ls = {
+        Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+        },
+    },
+}
+
+local ensure_installed_servers = { "lua_ls" }
+
+-- [[ Configure null-ls ]]
 local null_ls = require("null-ls")
 
 local lsp_format = function(bufnr)
@@ -276,35 +303,15 @@ null_ls.setup {
     },
 }
 
--- enable the following language servers
---  feel free to add/remove any lsps that you want here. they will automatically be installed.
---  add any additional override configuration in the following tables. they will be passed to
---  the `settings` field of the server config. you must look up that documentation yourself.
-local servers = {
-    -- clangd = {},
-    -- gopls = {},
-    -- pyright = {},
-    -- rust_analyzer = {},
-    -- tsserver = {},
-
-    gdscript = {},
-    sumneko_lua = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
-}
-
-local ensure_installed_servers = { "sumneko_lua" }
-
--- Setup neovim lua configuration
+-- [[ Configure Neodev ]]
 require("neodev").setup()
---
+
+-- [[ Configure Cmp (1) ]]
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+-- [[ Configure Mason / Mason-LSPconfig ]]
 -- Setup mason so it can manage external tooling
 require("mason").setup()
 
@@ -323,7 +330,8 @@ for server, opts in pairs(servers) do
     }
 end
 
--- nvim-cmp setup
+-- [[ Configure Cmp (2), Luasnip ]]
+-- See `:help nvim-cmp`
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
@@ -372,7 +380,7 @@ local setup_godot_dap = function()
     dap.adapters.godot = {
         type = "server",
         host = "127.0.0.1",
-        port = 6007,
+        port = 6006,
     }
 
     dap.configurations.gdscript = {
@@ -387,5 +395,4 @@ local setup_godot_dap = function()
     }
 end
 
--- if your godot version is 4.0 of above, you can uncomment the line below
--- setup_godot_dap()
+setup_godot_dap()
